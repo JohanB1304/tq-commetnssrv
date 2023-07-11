@@ -1,0 +1,14 @@
+{
+    "name": "tq-commentssrv/tq-commentssrv",
+    "description": "Componente comentarios",
+    "require-dev": {
+        "laravel/laravel": "^10.2"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "TqCommentssrv\\TqCommentssrv\\": "src/"
+        }
+    },
+    "require": {}
+}
