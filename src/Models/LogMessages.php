@@ -84,7 +84,7 @@ class LogMessages extends Model
             self::create([
                 "user_id" => is_null(Auth::user())?null:Auth::id(),
                 "ref_id" => $refId,
-                "annotation_id" => $annotation->guid,
+                "annotation_id" => is_null($annotation->guid)?$annotation->id:$annotation->guid,
                 "status" => "active",
             ]);
         }

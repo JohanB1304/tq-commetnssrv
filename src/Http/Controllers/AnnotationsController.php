@@ -40,18 +40,11 @@ class AnnotationsController
 
     public function store(Request $request ,$prefix, $refId)
     {
-        $comment = json_decode($request->getContent())->comment;
-        $annotation = annotation::create([
-            "ref_id" => $refId,
-            "user_id" => Auth::id(),
-            "comment" => $comment,
-        ]);
-
-        $log = new LogMessages();
-        $log->store($refId,$annotation);
-
+        $comment = json_decode($request->getContent());
+        $annotation = new Annotation();
+        $newAnnotation = $annotation->store($comment, $refId);
         return response()->json([
-            'data' => $annotation,
+            'data' => $newAnnotation,
             'status_code' => '200',
             'message' => 'Comentario creado correctamente'
         ]);

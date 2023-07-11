@@ -82,7 +82,9 @@ class Annotation extends Model
     }
 
     public function index($refId){
-        $data = self::where('ref_id', $refId)->get();
+        $data = self::where('ref_id', $refId)
+            ->select('guid as id', 'ref_id', 'user_id', 'comment', 'created_at', 'updated_at')
+            ->get();
         $data->each(function($annotation){
             $annotation ['author'] = $annotation->user($annotation->id);
         });
@@ -98,11 +100,11 @@ class Annotation extends Model
             "comment" => $request->comment,
         ]);
         $log = new LogMessages();
-        $log->readMessage($refId, $annotation);
-        return (AnnotationResource::make($annotation))->additional([
-            'status_code' => '200',
-            'message' => 'Comentario creado correctamente'
-        ]);
+        $log->store($refId, $annotation);
+        $annotation = self::where('guid',$annotation->guid)
+            ->select('guid as id', 'ref_id', 'user_id', 'comment', 'created_at', 'updated_at')
+            ->first();
+        return $annotation;
     }
 
     public function getTotalUnread($refId){
