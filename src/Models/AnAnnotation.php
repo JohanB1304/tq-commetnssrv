@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class Annotation extends Model
+class AnAnnotation extends Model
 {
     use HasUuids;
 
@@ -88,7 +88,7 @@ class Annotation extends Model
         $data->each(function($annotation){
             $annotation ['author'] = $annotation->user($annotation->id);
         });
-        $log = new LogMessages();
+        $log = new AnLogMessages();
         $log->readMessages($refId, $data);
         return $data;
     }
@@ -99,7 +99,7 @@ class Annotation extends Model
             "user_id" => Auth::id(),
             "comment" => $request->comment,
         ]);
-        $log = new LogMessages();
+        $log = new AnLogMessages();
         $log->store($refId, $annotation);
         $annotation = self::where('guid',$annotation->guid)
             ->select('guid as id', 'ref_id', 'user_id', 'comment', 'created_at', 'updated_at')
@@ -108,7 +108,7 @@ class Annotation extends Model
     }
 
     public function getTotalUnread($refId){
-        $readMessages = LogMessages::where('ref_id', $refId)
+        $readMessages = AnLogMessages::where('ref_id', $refId)
             ->where("user_id", Auth::id())
             ->get();
 
@@ -120,7 +120,7 @@ class Annotation extends Model
             $readMessages = [];
         }
 
-        return Annotation::where('ref_id', $refId)
+        return AnAnnotation::where('ref_id', $refId)
             ->whereNotIn('guid', $readMessages)
             ->count();
     }

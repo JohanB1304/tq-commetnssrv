@@ -1,17 +1,15 @@
 <?php
 namespace TqCommentssrv\TqCommentssrv\Http\Controllers;
 
-use App\Models\Annotation;
-use App\Models\LogMessages;
+use App\Models\AnAnnotation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class AnnotationsController
 {
     public function index(Request $request, $prefix, $refId)
     {
         try{
-            $annotation = new Annotation();
+            $annotation = new AnAnnotation();
             $data = $annotation->index($refId);
             return response()->json([
                 'data' => $data,
@@ -29,7 +27,7 @@ class AnnotationsController
 
     public function getTotal($prefix, $refId)
     {
-        $log = new Annotation();
+        $log = new AnAnnotation();
         $total = $log->getTotalUnread($refId);
         return response()->json([
             'total' => $total,
@@ -41,7 +39,7 @@ class AnnotationsController
     public function store(Request $request ,$prefix, $refId)
     {
         $comment = json_decode($request->getContent());
-        $annotation = new Annotation();
+        $annotation = new AnAnnotation();
         $newAnnotation = $annotation->store($comment, $refId);
         return response()->json([
             'data' => $newAnnotation,
