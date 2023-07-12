@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('ref_entity')->nullable();
             $table->string('user_id');
             $table->text('comment')->nullable();
-            $table->string('created_by', 64);
+            $table->string('created_by', 64)->nullable();
             $table->string('updated_by', 64)->nullable();
             $table->string('expired_by', 64)->nullable();
             $table->dateTime('expired_at')->nullable();
