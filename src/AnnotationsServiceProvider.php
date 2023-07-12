@@ -60,8 +60,8 @@ class AnnotationsServiceProvider extends ServiceProvider
     {
         $this->publishes(
             [
-                __DIR__ . '/Models/Annotation.php' => base_path('app/Models/Annotation.php'),
-                __DIR__ . '/Models/LogMessages.php' => base_path('app/Models/LogMessages.php'),
+                __DIR__ . '/Models/AnAnnotation.php' => base_path('app/Models/AnAnnotation.php'),
+                __DIR__ . '/Models/AnLogMessages.php' => base_path('app/Models/AnLogMessages.php'),
             ],
             'annotations-package'
         );
