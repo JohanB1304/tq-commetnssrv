@@ -10,53 +10,52 @@
 
 Components for Tiqal.
 1. [Installation](#installation)
-1. [Basic usage](#example-basic)
+1. [Settings](#setting-annotation-component)
+1. [Endpoints](#enpoints)
     - [Notification component](#example-notification-component)
     - [Task component](#example-task-component)  
-1. [Settings](#setting-task-component)
-    - [Notification component](#setting-notification-component)
-    - [Task component](#setting-task-component)
+
 
 ## <a name="installation"></a> Installation:
-**Install Dependencies**
+
+**Use the following command to install with composer.**
 ```bash
-$ @ng-bootstrap/ng-bootstrap@14.1.1 --save
+composer require tq-commentssrv/tq-commentssrv
 ```
-```bash
-$ @popperjs/core@2.11.7 --save
-```
-```bash
-$ bootstrap@5.2.3 --save
-```
-```bash
-$ @types/dragula@2.1.36 --save
-```
-```bash
-$ dragula@3.7.3 --save
-```
-```bash
-$ ng2-dragula@3.2.0 --save
-```
-```bash
-$ moment@2.29.4 --save
-```
-```bash
-$ moment-timezone@0.5.43 --save
-```
-```bash
-$ ngx-scrollbar@11.0.0 --save
-```
-```bash
-$ ngx-autosize@2.0.4 --save
+Register the service provider in your `config/app.php` configuration file:
+
+```php
+'providers' => [
+    ...
+    TqCommentssrv\TqCommentssrv\AnnotationsServiceProvider::class,
+],
 ```
 
-**Install This Library**
+Run the following command to publish the package config file, models files and routes for the the api:
 ```bash
-$ npm install tiqal
+php artisan vendor:publish --provider="TqCommentssrv\TqCommentssrv\AnnotationsServiceProvider"
 ```
 
-## <a name="example-basic"></a>Use Example:
-Add the declaration to your @NgModule:
+## <a name="setting-annotation-component"></a>Settings
+In the published config file annotation.php you can set the following config values:
+
+```  'base_url'  ``` means the application URL.</br>
+```  'ref_entity'  ``` means the reference class to associate the annotations.</br>
+```  'component_name'  ``` means the component name.</br>
+```  'main_table_name'  ``` means the name for the table main table.</br>
+```php
+return [
+    'base_url' => env('AN_BASE_URL','https://signaturesrv.metadockit.com/'),
+    'ref_entity' => env('AN_REF_ENTITY',\App\Models\Dossier::class),
+    'component_name' => env('AN_COMPONENT_NAME','annotations'),
+    'main_table_name' => env('AN_TABLE_NAME','an_annotations')
+];
+```
+
+## <a name="endpoints"></a>Endpoints:
+The following endpoints are going to be available four it usage:
+
+
 ```typescript
 import { TiqalModule } from 'tiqal';
 ...
@@ -81,7 +80,7 @@ Use directly inside your HTML templates
 <tiqal-task></tiqal-task>
 ```
 
-## <a name="setting-task-component"></a>Settings
+## <a name="setting-annotation-component"></a>Settings
 
 ## <a name="setting-notification-component"></a>Notification component
 Name  | Default | Type | Description
