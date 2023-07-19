@@ -60,7 +60,7 @@ The following endpoints are going to be available four it usage:
   Path: api/{slug_tenant}/annotation/{ref_id}</br>
   Parameters:
     - slug_tenant: Slug tenant of the authenticated user.
-    - ref_id: Id of the reference entity associated to the annotation.
+    - ref_id: Id of the associated reference entity to the annotation.
   </br>
   Responses:
       200:
@@ -93,7 +93,7 @@ The following endpoints are going to be available four it usage:
   Path: api/{slug_tenant}/annotation/{ref_id}</br>
   Parameters:
     - slug_tenant: Slug tenant of the authenticated user.
-    - ref_id: Id of the reference entity associated to the annotation.
+    - ref_id: Id of the associated reference entity to the annotation.
   </br>
   Request body:
 ```json
@@ -129,7 +129,7 @@ The following endpoints are going to be available four it usage:
   Path: api/{slug_tenant}/annotation/{ref_id}/get_qty_messages_unread</br>
   Parameters:
     - slug_tenant: Slug tenant of the authenticated user.
-    - ref_id: Id of the reference entity associated to the annotation.
+    - ref_id: Id of the associated reference entity to the annotation.
   </br>
   Responses:
       200:
