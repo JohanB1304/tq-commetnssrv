@@ -55,47 +55,95 @@ return [
 ## <a name="endpoints"></a>Endpoints:
 The following endpoints are going to be available four it usage:
 
-
-```typescript
-import { TiqalModule } from 'tiqal';
-...
-@NgModule({
-  imports: [
-    TiqalModule.forRoot({
-      url: ''
-    })
-  ]
-})
+- Index annotations</br>
+  Method: GET</br>
+  Path: api/{slug_tenant}/annotation/{ref_id}</br>
+  Parameters:
+    - slug_tenant: Slug tenant of the authenticated user.
+    - ref_id: Id of the reference entity associated to the annotation.
+  </br>
+  Responses:
+      200:
+```json
+{
+  "data":[
+    {
+      "id": "999f4afb-8c7f-454e-bc5e-8f234634cc53",
+      "ref_id": "263b3243-8428-42c6-a71e-0973b9cf95cd",
+      "user_id": "06c5b85c-6e27-43dd-b68a-feac2aa8f80e",
+      "comment": "prueba reunión",
+      "created_at": "2023-07-11 11:52:48",
+      "updated_at": "2023-07-11 16:52:48",
+    }
+  ],
+  "status_code": "200",
+  "message": "ok"
+}
+```
+    - 400:
+```json
+{
+  "status_code": "400",
+  "message": "Bad request"
+}
+```
+</br>
+- Store:
+  Method: POST</br>
+  Path: api/{slug_tenant}/annotation/{ref_id}</br>
+  Parameters:
+    - slug_tenant: Slug tenant of the authenticated user.
+    - ref_id: Id of the reference entity associated to the annotation.
+  </br>
+  Request body:
+```json
+{
+  "comment": "string"
+}
+```
+  </br>
+    
+  responses:
+  
+    - 200:
+```json
+{
+  "data":[
+    {
+      "id": "999f4afb-8c7f-454e-bc5e-8f234634cc53",
+      "ref_id": "263b3243-8428-42c6-a71e-0973b9cf95cd",
+      "user_id": "06c5b85c-6e27-43dd-b68a-feac2aa8f80e",
+      "comment": "prueba reunión",
+      "created_at": "2023-07-11 11:52:48",
+      "updated_at": "2023-07-11 16:52:48",
+      "author": {}
+    }
+  ],
+  "status_code": "200",
+  "message": "ok"
+}
 ```
 
-**<a name="example-notification-component"></a> Notification component**
+-GetTotal unread messages:
+  Method: GET</br>
+  Path: api/{slug_tenant}/annotation/{ref_id}/get_qty_messages_unread</br>
+  Parameters:
+    - slug_tenant: Slug tenant of the authenticated user.
+    - ref_id: Id of the reference entity associated to the annotation.
+  </br>
+  Responses:
+      200:
+```json
+{
+  "total": 5,
+  "status_code": "200",
+  "message": "ok"
+}
 ```
-<tiqal-notification></tiqal-notification>
-```
+    - 400:
+```json
+{
+  "status_code": "400",
+  "message": "Bad request"
+}
 
-Use directly inside your HTML templates
-
-**<a name="example-task-component"></a> Task component**
-```
-<tiqal-task></tiqal-task>
-```
-
-## <a name="setting-annotation-component"></a>Settings
-
-## <a name="setting-notification-component"></a>Notification component
-Name  | Default | Type | Description
---- | --- | --- | ---
-config | `None` | `<TiqalConfig>` | Configuration
-disabled | `false` | `boolean` | Enable or disable component
-minRows | `2` | `integer` | Sets minimal amount of rows of the textarea
-maxRows | `5` | `integer` | Sets maximum amount of rows of the textarea
-maxLength | `1000` | `integer` | Sets the maximum number of characters
-tenantId | `1000` | `string` | Sets TenantId
-
-
-## Events / Outputs
-Name  | Description
---- | ---
-event | Called whenever component performs an action
-
-## <a name="setting-task-component"></a>Task component
