@@ -87,7 +87,7 @@ The following endpoints are going to be available four it usage:
   "message": "Bad request"
 }
 ```
-</br>
+
 - Store annotations: </br>
   Method: POST</br>
   Path: api/{slug_tenant}/annotation/{ref_id}</br>
@@ -124,7 +124,7 @@ The following endpoints are going to be available four it usage:
 }
 ```
 
--GetTotal unread messages:
+- GetTotal unread messages:
   Method: GET</br>
   Path: api/{slug_tenant}/annotation/{ref_id}/get_qty_messages_unread</br>
   Parameters:
