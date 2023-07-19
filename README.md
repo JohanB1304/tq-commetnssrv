@@ -80,7 +80,7 @@ The following endpoints are going to be available four it usage:
   "message": "ok"
 }
 ```
-    - 400:
+    400:
 ```json
 {
   "status_code": "400",
@@ -88,7 +88,7 @@ The following endpoints are going to be available four it usage:
 }
 ```
 </br>
-- Store:
+- Store annotations: </br>
   Method: POST</br>
   Path: api/{slug_tenant}/annotation/{ref_id}</br>
   Parameters:
@@ -105,7 +105,7 @@ The following endpoints are going to be available four it usage:
     
   responses:
   
-    - 200:
+    200:
 ```json
 {
   "data":[
@@ -140,7 +140,7 @@ The following endpoints are going to be available four it usage:
   "message": "ok"
 }
 ```
-    - 400:
+    400:
 ```json
 {
   "status_code": "400",
