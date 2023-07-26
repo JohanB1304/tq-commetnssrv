@@ -86,7 +86,7 @@ class AnAnnotation extends Model
             ->select('guid as id', 'ref_id', 'user_id', 'comment', 'created_at', 'updated_at')
             ->get();
         $data->each(function($annotation){
-            $annotation ['author'] = $annotation->user($annotation->id);
+            $annotation ['author'] = $annotation->user($annotation->user_id);
         });
         $log = new AnLogMessages();
         $log->readMessages($refId, $data);
