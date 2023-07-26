@@ -85,8 +85,10 @@ class AnAnnotation extends Model
         $data = self::where('ref_id', $refId)
             ->select('guid as id', 'ref_id', 'user_id', 'comment', 'created_at', 'updated_at')
             ->get();
-        $data->each(function($annotation){
-            $annotation ['author'] = $annotation->user($annotation->user_id);
+        $fieldName = config('annotation.author_field_name');
+        $data->each(function($annotation) use($fieldName){
+            $user = $annotation->user($annotation->user_id);
+            $annotation ['author'] = $user->{is_null($fieldName)?'fullname':$fieldName};
         });
         $log = new AnLogMessages();
         $log->readMessages($refId, $data);
