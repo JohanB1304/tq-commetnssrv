@@ -123,6 +123,6 @@ class AnAnnotation extends Model
 
     public function setAuthor($annotation, $fieldName){
         $user = $annotation->user($annotation->user_id);
-        $annotation ['author'] = is_null($user)?(null):($user->full_name);
+        $annotation ['author'] = is_null($user)?(null):($user->{is_null($fieldName)?'fullname':$fieldName});
     }
 }
