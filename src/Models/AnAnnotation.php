@@ -57,13 +57,6 @@ class AnAnnotation extends Model
         "tenant_id",
     ];
 
-    // protected static function boot()
-    // {
-    //     parent::boot();
-
-    //     self::observe(ModelObserver::class);
-    // }
-
     public function user($userId)
     {
         // return $this->belongsTo(
@@ -87,8 +80,7 @@ class AnAnnotation extends Model
             ->get();
         $fieldName = config('annotation.author_field_name');
         $data->each(function($annotation) use($fieldName){
-            $user = $annotation->user($annotation->user_id);
-            $annotation ['author'] = is_null($user)?(null):($user->{is_null($fieldName)?'fullname':$fieldName});
+            $this->setAuthor($annotation, $fieldName);
         });
         $log = new AnLogMessages();
         $log->readMessages($refId, $data);
@@ -106,6 +98,8 @@ class AnAnnotation extends Model
         $annotation = self::where('guid',$annotation->guid)
             ->select('guid as id', 'ref_id', 'user_id', 'comment', 'created_at', 'updated_at')
             ->first();
+        $fieldName = config('annotation.author_field_name');
+        $this->setAuthor($annotation, $fieldName);
         return $annotation;
     }
 
@@ -125,5 +119,10 @@ class AnAnnotation extends Model
         return AnAnnotation::where('ref_id', $refId)
             ->whereNotIn('guid', $readMessages)
             ->count();
+    }
+
+    public function setAuthor($annotation, $fieldName){
+        $user = $annotation->user($annotation->user_id);
+        $annotation ['author'] = is_null($user)?(null):($user->full_name);
     }
 }
