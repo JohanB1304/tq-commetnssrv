@@ -88,7 +88,7 @@ class AnAnnotation extends Model
         $fieldName = config('annotation.author_field_name');
         $data->each(function($annotation) use($fieldName){
             $user = $annotation->user($annotation->user_id);
-            $annotation ['author'] = $user->{is_null($fieldName)?'fullname':$fieldName};
+            $annotation ['author'] = is_null($user)?(null):($user->{is_null($fieldName)?'fullname':$fieldName});
         });
         $log = new AnLogMessages();
         $log->readMessages($refId, $data);
